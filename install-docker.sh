@@ -26,6 +26,7 @@ check_docker_compose_installed() {
     fi
 }
 
+# 环境检查
 echo_info "开始检查环境..."
 check_docker_installed
 check_docker_compose_installed
@@ -57,7 +58,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 echo_info "安装 Docker Compose 插件..."
 sudo apt-get install -y docker-compose-plugin
 
-# 从 GitHub 获取最新版本的 Docker Compose
+# 获取 Docker Compose 最新版本并安装
 echo_info "下载并安装最新版本的 Docker Compose..."
 DOCKER_COMPOSE_VERSION=$(curl -fsSL https://api.github.com/repos/docker/compose/releases/latest | grep tag_name | cut -d '"' -f 4)
 sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -71,4 +72,5 @@ echo_info "验证 Docker 和 Docker Compose 的安装..."
 docker --version
 docker compose version
 
+# 完成安装
 echo_info "Docker 和 Docker Compose 安装完成！"
